@@ -11,3 +11,8 @@ print(encrypted)
 decrypted = cryptor.decrypt(encrypted, password)
 print(decrypted)
 
+
+encrypted = "U2FsdGVkX1/6saueyNdhVJI0+S7KAtdUFJcC85Kfmgw="
+password="a12345678_"
+decrypted = cryptor.decrypt(encrypted, password)
+print(decrypted)

@@ -18,10 +18,16 @@ class cryptor:
     # pwd and salt must be bytes objects
     @classmethod
     def _openssl_kdf(cls, algo, pwd, salt, key_size, iv_size):
+
+
+        print('PWD=' + binascii.hexlify(pwd).decode('ascii').upper())
+
         if algo == 'md5':
             temp = pbkdf1(pwd, salt, 1, 16, 'md5')
         else:
             temp = b''
+
+        print('FD=' + binascii.hexlify(temp).decode('ascii').upper())
 
         fd = temp
         while len(fd) < key_size + iv_size:
@@ -56,4 +62,6 @@ class cryptor:
         key, iv = cls._openssl_kdf('md5', bytes(password, encoding='ascii'), salt, 32, 16)
         cipher = AES.new(key, AES.MODE_CBC, iv)
         msg = cipher.decrypt(data)
-        return cls._unpad(msg.decode('ascii'))
+        aaaa = msg.decode('ascii')
+        print(ord(aaaa[16]))
+        return cls._unpad(msg.decode('ascii')) + "]]]"
